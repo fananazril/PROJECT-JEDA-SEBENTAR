@@ -2,10 +2,10 @@
 
 :root {
   --bg-dark: #0e0e10;
-  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.284);
   --glass-border: rgba(255, 255, 255, 0.249);
   --text-main: rgb(171, 0, 0);
-  --text-sub: #b0b4c3;
+  --text-sub: #585858;
   --accent: #ea0000;
   --danger: #ff6b6b;
 }
@@ -14,8 +14,9 @@ body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   color: var(--text-main);
-  background: url('JURNAL/assets/Page1.png');
+  background: url('../../assets/Page1.png');
   background-size: cover;
+  display: flex;
   overflow-x: hidden;
   position: relative;
   padding-bottom: 60px;
@@ -75,9 +76,9 @@ body {
 .form-group input {
     width: 100%;
     padding: 12px;
-    border: none;
+    border: 1px solid rgba(80, 80, 80, 0.247);
     border-radius: 8px;
-    background: rgba(118, 19, 19, 0.606);
+    background: rgb(228, 228, 228);
     color: var(--text-main);
     font-size: 16px;
     box-sizing: border-box;

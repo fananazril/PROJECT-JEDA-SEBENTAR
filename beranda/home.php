@@ -11,7 +11,8 @@ if (!$currentUserId) {
 }
 
 require_once __DIR__ . '/../database/database.php';
-require_once 'functions_jurnal.php'; // berisi fungsi getAllJurnal, cariJurnalByJudul
+require_once __DIR__ . '/../action/jurnalaction/listjurnal.php';
+require_once __DIR__ . '/../action/jurnalaction/carijurnal.php';
 
 $allowedSortColumns = ['id','judul','tanggal'];
 $allowedSortOrders = ['ASC', 'DESC'];
@@ -51,12 +52,20 @@ if ($conn) mysqli_close($conn);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jurnal Pribadi</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 <header class="header">
-    <h1>Jurnal Pribadi</h1>
+    <h1>Jurnal Pribadi</h1>    
+    <div class="top-bar">
+        <input type="text" placeholder="Cari jurnal..." id="searchInput">
+        <select id="sortSelect">
+            <option value="judul">Urutkan: Judul</option>
+            <option value="tanggal">Urutkan: Tanggal</option>
+        </select>
+        <button class="add-btn" id="addJurnalBtn">+ Tambah Jurnal</button>
+    </div>
     <nav>
         <button id="dark-toggle">🌙</button>
         <a href="/../action/useraction/logout.php" onclick="return confirm('Yakin ingin logout?');">Logout</a>

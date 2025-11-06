@@ -1,14 +1,14 @@
 <?php
 session_start();
-require_once __DIR__ . '../database/database.php';
+require_once __DIR__ . '/../../database/database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
     if (empty($username) || empty($password)) {
-        header("Location: /../action/loginlogin.php?error=Username dan password wajib diisi!");
+        header("Location: /../action/login/login.php?error=Username dan password wajib diisi!");
         exit;
     }
-    $sql = "SELECT id, username, password FROM user WHERE username = ?";
+    $sql = "SELECT id, username, password FROM users WHERE username = ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         mysqli_stmt_bind_param($stmt, "s", $username);

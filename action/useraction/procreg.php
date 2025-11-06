@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '../../database/database.php';
+require_once __DIR__ . '../../../database/database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');

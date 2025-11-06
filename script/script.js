@@ -1,9 +1,17 @@
-// Modal handling
 var addModal = document.getElementById("addJurnalModal");
 var editModal = document.getElementById("editJurnalModal");
 var closeButtons = document.querySelectorAll(".close-btn");
 var editLinks = document.querySelectorAll(".edit-link");
 
+// Tombol Tambah Jurnal
+var addBtn = document.getElementById("addJurnalBtn");
+if (addBtn) {
+    addBtn.addEventListener("click", function() {
+        if (addModal) addModal.style.display = "flex";
+    });
+}
+
+// Modal Edit
 editLinks.forEach(link => {
     link.addEventListener('click', function(event) {
         event.preventDefault();
@@ -21,10 +29,11 @@ editLinks.forEach(link => {
         editForm.querySelector('#edit-tanggal').value = tanggal;
         editForm.querySelector('#edit-isi').value = isi;
 
-        editModal.style.display = "block";
+        editModal.style.display = "flex";
     });
 });
 
+// Tutup Modal
 closeButtons.forEach(button => {
     button.onclick = function() {
         let modal = this.closest('.modal');
@@ -36,7 +45,7 @@ window.onclick = function(event) {
     if (event.target.classList.contains('modal')) event.target.style.display = "none";
 }
 
-// Dropdown
+// Dropdown ⋮
 const actionButtons = document.querySelectorAll('.jurnal-actions-btn');
 actionButtons.forEach(button => {
     button.addEventListener('click', function(e) {
@@ -57,7 +66,7 @@ window.addEventListener('click', function(e){
     }
 });
 
-// Dark mode toggle
+// Mode Gelap
 (function(){
     const toggleBtn = document.getElementById('dark-toggle');
     const body = document.body;

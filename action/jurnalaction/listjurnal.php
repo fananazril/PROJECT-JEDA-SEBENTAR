@@ -1,12 +1,12 @@
 <?php
 function getAllJurnal(mysqli $connection, int $userid, string $sortBy = 'judul', string $sortOrder = 'ASC'): array {
     $allJurnal = [];
-    $allowedCols = ['id', 'judul', 'tanggal']; // field yang bisa di-sort
+    $allowedCols = ['id', 'judul', 'tanggal']; 
     $allowedOrders = ['ASC', 'DESC'];
     $sortBy = in_array($sortBy, $allowedCols) ? $sortBy : 'judul';
     $sortOrder = in_array(strtoupper($sortOrder), $allowedOrders) ? strtoupper($sortOrder) : 'ASC';
 
-    $sql = "SELECT id, judul, isi, tanggal FROM jurnal WHERE id_user = ? ORDER BY `$sortBy` $sortOrder";
+    $sql = "SELECT idjurnal, judul, isi, tanggal FROM jurnal WHERE id_user = ? ORDER BY `$sortBy` $sortOrder";
     $stmt = mysqli_prepare($connection, $sql);
 
     if ($stmt) {

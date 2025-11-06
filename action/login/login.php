@@ -24,7 +24,7 @@ if (isset($_SESSION['username'])) {
             <p class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></p>
         <?php endif; ?>
 
-        <form action="/../useraction/proclogin.php]" method="POST"> <div class="form-group">
+        <form action="/../action/useraction/proclogin.php" method="POST"> <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
             </div>
