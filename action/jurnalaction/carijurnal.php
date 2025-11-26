@@ -1,13 +1,13 @@
 <?php
 function cariJurnalByJudul(mysqli $connection, string $keyword, int $userid, string $sortBy = 'judul', string $sortOrder = 'ASC'): array {
     $foundJurnal = [];
-    $allowedCols = ['id', 'judul', 'tanggal'];
+    $allowedCols = ['idjurnal', 'judul', 'tanggal'];
     $allowedOrders = ['ASC', 'DESC'];
     $sortBy = in_array($sortBy, $allowedCols) ? $sortBy : 'judul';
     $sortOrder = in_array(strtoupper($sortOrder), $allowedOrders) ? strtoupper($sortOrder) : 'ASC';
 
     $keywordAman = mysqli_real_escape_string($connection, $keyword);
-    $sql = "SELECT id, judul, isi, tanggal
+    $sql = "SELECT idjurnal, judul, isi, tanggal
             FROM jurnal
             WHERE judul LIKE ? AND id_user = ? 
             ORDER BY `$sortBy` $sortOrder";

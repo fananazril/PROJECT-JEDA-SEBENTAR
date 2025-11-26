@@ -45,7 +45,7 @@ if(isset($_SESSION['username'])){
         </button>
     </div>
 </div>
-            <button type="submit" name="submit" class="register-button">DAFTAR</button>
+        <button type="submit" name="submit" class="register-button">DAFTAR</button>
         </form>
         <p class="login-link">
             Sudah punya akun?
@@ -64,7 +64,7 @@ if(isset($_SESSION['username'])){
             echo 'Login Sekarang';
             } else { 
             ?>
-                <button onclick="window.location.href='/..action/register/register.php'">
+                <button onclick="window.location.href='/../action/register/register.php'">
             <?php 
             echo 'Tutup';
             }

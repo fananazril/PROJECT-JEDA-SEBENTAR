@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_store_result($stmtCheckUser);
         if (mysqli_stmt_num_rows($stmtCheckUser) > 0) {
             mysqli_stmt_close($stmtCheckUser);
-            header("Location: /../action/register/register.php?status=error&msg=" . urlencode("Username '$username' sudah digunakan!"));
+            header("Location: /../action/register/register.php?status=error&msg=" . urlencode("Username sudah digunakan!"));
             exit;
         }
         mysqli_stmt_close($stmtCheckUser);
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_stmt_num_rows($stmtCheckEmail) > 0) {
             mysqli_stmt_close($stmtCheckEmail);
-            header("Location: /../action/register/register.php?status=error&msg=" . urlencode("Email '$email' sudah digunakan!"));
+            header("Location: /../action/register/register.php?status=error&msg=" . urlencode("Email sudah digunakan!"));
             exit;
         }
         mysqli_stmt_close($stmtCheckEmail);
