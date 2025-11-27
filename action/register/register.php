@@ -82,8 +82,5 @@ if(isset($_SESSION['username'])){
         }
     }?>
 
-    <footer class="footer">
-         <p>© 2025 Jeda Sebentar</p>
-    </footer>
 </body>
 </html>

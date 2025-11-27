@@ -38,9 +38,5 @@ if (isset($_SESSION['username'])) {
             Belum punya akun? <a href="../register/register.php"> Daftar di sini </a>
         </p>
     </div>
-
-    <footer class="footer">
-         <p>© 2025 Jeda Sebentar</p>
-    </footer>
 </body>
 </html>
