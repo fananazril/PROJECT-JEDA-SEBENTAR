@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['user_id'])) {
-    header("Location: /../../login/login.php");
+    header("Location: ../../login/login.php");
     exit;
 }
 
@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validasi
     if ($idJurnal > 0 && !empty($judul) && !empty($isi)) {
-        // Update jurnal hanya jika milik user yang login
         $sql = "UPDATE jurnal SET judul = ?, isi = ?, tanggal = ? WHERE idjurnal = ? AND id_user = ?";
         $stmt = mysqli_prepare($conn, $sql);
 
@@ -37,6 +36,6 @@ if ($conn) {
     mysqli_close($conn);
 }
 
-header("Location: /../../beranda/home.php");
+header("Location: ../../beranda/home.php");
 exit;
 ?>

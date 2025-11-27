@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['user_id'])) {
-    header("Location: /../../login/login.php");
+    header("Location: ../../login/login.php");
     exit;
 }
 
@@ -30,6 +30,6 @@ if ($conn) {
     mysqli_close($conn);
 }
 
-header("Location: /../../beranda/home.php");
+header("Location: ../../beranda/home.php");
 exit;
 ?>

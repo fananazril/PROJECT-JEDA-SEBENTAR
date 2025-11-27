@@ -16,8 +16,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--text-main);
-  background: url("/assets/TEXTURE.png") no-repeat center center/cover;
-  background-attachment: fixed;
+  background: white;
   overflow-x: hidden;
   min-height: 100vh;
   padding-bottom: 60px;
@@ -182,7 +181,7 @@ nav { flex-shrink: 0; }
 .jurnal-left { flex: 1; min-width: 0; }
 
 .jurnal-title {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 600;
   color: var(--text-main);
   margin-bottom: 6px;
@@ -190,7 +189,7 @@ nav { flex-shrink: 0; }
 }
 
 .jurnal-tanggal {
-  font-size: 0.8rem;
+  font-size: 13px;
   color: var(--text-sub);
   margin-bottom: 10px;
   display: flex;
@@ -199,7 +198,7 @@ nav { flex-shrink: 0; }
 }
 
 .jurnal-preview {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: var(--text-sub);
   line-height: 1.6;
   margin-top: 8px;
@@ -219,7 +218,7 @@ nav { flex-shrink: 0; }
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid var(--glass-border);
   color: var(--text-main);
-  font-size: 1.1rem;
+  font-size: 17px;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -275,13 +274,13 @@ nav { flex-shrink: 0; }
 }
 
 .no-jurnal i {
-  font-size: 3rem;
+  font-size: 50px;
   color: var(--text-sub);
   opacity: 0.5;
   margin-bottom: 16px;
 }
 
-.no-jurnal p { font-size: 1rem; margin-top: 10px; }
+.no-jurnal p { font-size: 16px; margin-top: 10px; }
 
 /* MODAL */
 .modal {
@@ -316,7 +315,7 @@ nav { flex-shrink: 0; }
   margin: 0 0 24px 0;
   color: var(--text-main);
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 24px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -326,7 +325,7 @@ nav { flex-shrink: 0; }
   position: absolute;
   top: 20px;
   right: 20px;
-  font-size: 1.6rem;
+  font-size: 26px;
   cursor: pointer;
   color: var(--text-main);
   line-height: 1;
@@ -351,7 +350,7 @@ nav { flex-shrink: 0; }
 
 .modal-content label {
   color: var(--text-main);
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 500;
   margin-bottom: 4px;
 }
@@ -396,7 +395,7 @@ nav { flex-shrink: 0; }
   gap: 8px;
 }
 
-/* DETAIL MODAL */
+/* DETAIL MODAL - SUDAH DIPERBAIKI */
 .modal-detail {
   max-width: 900px;
   padding: 0;
@@ -408,29 +407,32 @@ nav { flex-shrink: 0; }
   background: linear-gradient(135deg, rgba(234, 0, 0, 0.08) 0%, rgba(171, 0, 0, 0.05) 100%);
   padding: 35px 40px;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  gap: 12px;
   border-bottom: 2px solid rgba(234, 0, 0, 0.1);
   position: relative;
 }
 
 .detail-header h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 26px;
   color: var(--text-main);
-  text-align: center;
   font-weight: 600;
   line-height: 1.3;
-  flex: 0 1 auto;
-  max-width: 60%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .detail-actions {
   display: flex;
   gap: 8px;
-  position: absolute;
-  right: 70px;
   flex-shrink: 0;
 }
 
@@ -439,37 +441,56 @@ nav { flex-shrink: 0; }
   padding: 8px 10px;
   border: none;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
 }
 
 .btn-edit {
   background: rgba(52, 152, 219, 0.15);
   color: #3498db;
   border: 1px solid rgba(52, 152, 219, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+  background: rgba(52, 152, 219, 0.25);
+  transform: scale(1.05);
 }
 
 .btn-delete {
   background: rgba(231, 76, 60, 0.15);
   color: #e74c3c;
   border: 1px solid rgba(231, 76, 60, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  background: rgba(231, 76, 60, 0.25);
+  transform: scale(1.05);
 }
 
 .detail-tanggal {
   padding: 20px 40px;
-  font-size: 1rem;
+  font-size:16px;
   color: var(--text-sub);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   background: rgba(234, 0, 0, 0.03);
   font-weight: 500;
+}
+
+.detail-tanggal-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .detail-tanggal i { color: var(--accent); }
@@ -482,7 +503,7 @@ nav { flex-shrink: 0; }
 
 .detail-isi {
   padding: 40px;
-  font-size: 1.05rem;
+  font-size: 16px;
   line-height: 1.8;
   color: #333;
   white-space: pre-wrap;
@@ -500,7 +521,7 @@ nav { flex-shrink: 0; }
 .detail-timestamp {
   padding: 20px 40px 30px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 15px;
   color: var(--text-sub);
   background: rgba(234, 0, 0, 0.02);
   border-top: 1px solid rgba(234, 0, 0, 0.1);
@@ -514,15 +535,14 @@ nav { flex-shrink: 0; }
 
 .detail-timestamp i {
   color: var(--accent);
-  font-size: 1rem;
+  font-size: 15px;
 }
 
 .detail-timestamp:empty {
   display: none;
 }
 
-/*END OF DETAIL MODAL */
-
+/* FOOTER */
 .footer {
     position: fixed;
     bottom: 0;
@@ -545,7 +565,7 @@ nav { flex-shrink: 0; }
     background: rgba(255, 255, 255, 0.08);
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .header { flex-direction: column; gap: 12px; padding: 16px; }
   .top-bar { width: 100%; flex-direction: column; gap: 10px; }
@@ -561,40 +581,72 @@ nav { flex-shrink: 0; }
   .modal-detail { max-width: 95%; }
   
   .detail-header {
-    flex-direction: column;
     padding: 25px 20px;
-    text-align: center;
     gap: 15px;
+    flex-wrap: nowrap;
   }
   
   .detail-header h2 {
-    font-size: 1.5rem;
-    max-width: 100%;
-    padding: 0 20px;
+    font-size: 22px;
+    padding-right: 80px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
   
-  .detail-actions { width: auto; justify-content: center; }
-  .modal-detail .close-btn { top: 15px; right: 15px; }
-  .detail-tanggal { padding: 15px 20px; font-size: 0.9rem; }
+  .detail-actions {
+    gap: 6px;
+    right: 60px;
+  }
+  
+  .btn-edit,
+  .btn-delete {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  
+  .modal-detail .close-btn { 
+    top: 15px; 
+    right: 15px;
+  }
+  
+  .detail-tanggal { padding: 15px 20px; font-size: 14px; }
   .detail-divider { margin: 0 20px; }
-  .detail-isi { padding: 25px 20px; font-size: 0.95rem; }
-
-  .detail-isi {
-    padding: 25px 20px;
-    font-size: 0.95rem;
-    max-height: 300px; /* Lebih pendek di mobile */
+  .detail-isi { 
+    padding: 25px 20px; 
+    font-size: 15px;
+    max-height: 300px;
   }
   
   .detail-timestamp {
     padding: 15px 20px 20px;
-    font-size: 0.85rem;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
-  .jurnal-title { font-size: 1.1rem; }
-  .modal-content h2 { font-size: 1.25rem; }
-  .detail-header h2 { font-size: 1.3rem; }
-  .detail-isi { font-size: 0.9rem; }
+  .jurnal-title { font-size: 18px; }
+  .modal-content h2 { font-size: 20px; }
+  
+  .detail-header {
+    padding: 20px 15px;
+  }
+  
+  .detail-header h2 { 
+    font-size: 20px;
+  }
+  
+  .detail-tanggal {
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+  
+  .btn-edit,
+  .btn-delete {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+  
+  .detail-isi { font-size: 14px; }
 }
-

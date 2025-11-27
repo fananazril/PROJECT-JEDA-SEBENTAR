@@ -5,6 +5,7 @@ const addBtn = document.getElementById("addJurnalBtn");
 
 let currentDetailId = null;
 
+//fungsi tombol tambah
 if (addBtn) {
     addBtn.addEventListener("click", function(e) {
         e.preventDefault();
@@ -14,6 +15,7 @@ if (addBtn) {
     });
 }
 
+//fungsi tombol close
 document.querySelectorAll(".close-btn").forEach(btn => {
     btn.addEventListener("click", function() {
         const modal = this.closest(".modal");
@@ -23,6 +25,7 @@ document.querySelectorAll(".close-btn").forEach(btn => {
     });
 });
 
+//fungsi klik di luar modal
 document.querySelectorAll(".modal").forEach(modal => {
     modal.addEventListener("click", function(e) {
         if (e.target === modal) {
@@ -31,6 +34,7 @@ document.querySelectorAll(".modal").forEach(modal => {
     });
 });
 
+//fungsi tombol dropdown
 document.querySelectorAll(".jurnal-actions-btn").forEach(btn => {
     btn.addEventListener("click", function(e) {
         e.preventDefault();
@@ -54,6 +58,7 @@ document.querySelectorAll(".jurnal-actions-btn").forEach(btn => {
     });
 });
 
+//fungsi klik dropdown
 document.addEventListener("click", function(e) {
     if (!e.target.closest(".jurnal-actions")) {
         document.querySelectorAll(".dropdown-menu").forEach(menu => {
@@ -65,6 +70,7 @@ document.addEventListener("click", function(e) {
     }
 });
 
+//edit modal aktif
 document.addEventListener("click", function(e) {
     if (e.target.closest(".edit-link")) {
         e.preventDefault();
@@ -98,6 +104,7 @@ document.addEventListener("click", function(e) {
     }
 });
 
+//detail modal aktif
 document.querySelectorAll(".jurnal-card").forEach(card => {
     card.addEventListener("click", function(e) {
 
@@ -121,6 +128,7 @@ document.querySelectorAll(".jurnal-card").forEach(card => {
         
         document.getElementById("detail-isi").textContent = isi;
         
+        //timestamp dibuat
         const timestampElement = document.getElementById("detail-timestamp");
         if (timestampElement && dibuat) {
             const timestampDate = new Date(dibuat);
@@ -144,8 +152,7 @@ document.querySelectorAll(".jurnal-card").forEach(card => {
     });
 });
 
-
-// Edit dalam Detail Modal
+// Edit di Detail Modal
 const detailEditBtn = document.getElementById("detailEditBtn");
 if (detailEditBtn) {
     detailEditBtn.addEventListener("click", function(e) {
@@ -166,7 +173,7 @@ if (detailEditBtn) {
     });
 }
 
-// Delete from Detail Modal
+// Delete di Detail Modal
 const detailDeleteBtn = document.getElementById("detailDeleteBtn");
 if (detailDeleteBtn) {
     detailDeleteBtn.addEventListener("click", function(e) {
@@ -175,7 +182,7 @@ if (detailDeleteBtn) {
         if (!currentDetailId) return;
         
         if (confirm('Apakah Anda yakin ingin menghapus jurnal ini?')) {
-            window.location.href = `/../action/jurnalaction/hapusjurnal.php?id=${currentDetailId}`;
+            window.location.href = `../action/jurnalaction/hapusjurnal.php?id=${currentDetailId}`;
         }
     });
 }
@@ -195,6 +202,7 @@ document.addEventListener("keydown", function(e) {
     }
 });
 
+// Set Tanggal di Modal
 if (addModal) {
     const tanggalInput = addModal.querySelector("#tanggal");
     if (tanggalInput && !tanggalInput.value) {

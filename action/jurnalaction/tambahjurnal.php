@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['user_id'])) {
-    header("Location: /../login/login.php");
+    header("Location: ../login/login.php");
     exit;
 }
 
@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tanggal = $_POST['tanggal'] ?? date('Y-m-d'); 
     $dibuat = date('Y-m-d H:i:s'); 
 
-    // Validasi sederhana
     if (!empty($judul) && !empty($isi)) {
         $sql = "INSERT INTO jurnal (id_user, judul, isi, tanggal, dibuat) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
@@ -36,6 +35,6 @@ if ($conn) {
     mysqli_close($conn);
 }
 
-header("Location: /../../beranda/home.php");
+header("Location: ../../beranda/home.php");
 exit;
 ?>

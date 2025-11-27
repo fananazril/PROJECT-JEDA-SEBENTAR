@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
     if (empty($username) || empty($password)) {
-        header("Location: /../action/login/login.php?error=Username dan password wajib diisi!");
+        header("Location: ../login/login.php?error=Username dan password wajib diisi!");
         exit;
     }
     $sql = "SELECT id, username, password FROM users WHERE username = ?";
@@ -20,24 +20,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
-                header("Location: /../beranda/home.php");
+                header("Location: ../../beranda/home.php");
                 exit;
             } else {
-                header("Location: /../action/login/login.php?error=Username atau password salah!");
+                header("Location: ../login/login.php?error=Username atau password salah!");
                 exit;
             }
         } else {
-            header("Location: /../action/login/login.php?error=Username atau password salah!");
+            header("Location: ../login/login.php?error=Username atau password salah!");
             exit;
         }
     } else {
         error_log("MySQLi prepare error: " . mysqli_error($conn));
-        header("Location: /../action/login/login.php?error=Terjadi kesalahan sistem.");
+        header("Location: ../login/login.php?error=Terjadi kesalahan sistem.");
         exit;
     }
 
 } else {
-    header("Location: /../action/login/login.php");
+    header("Location: ../login/login.php");
     exit;
 }
 if ($conn) {

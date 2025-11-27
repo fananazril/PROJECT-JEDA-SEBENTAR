@@ -9,6 +9,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 session_destroy();
-header("Location: /../action/login/login.php");
+header("Location: ../login/login.php");
 exit;
 ?>

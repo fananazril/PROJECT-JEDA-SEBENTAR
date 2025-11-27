@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['username'])){
-    header("Location: /../beranda/home.php"); // path ke beranda
+    header("Location: ../beranda/home.php"); 
     exit;
 }
 ?>
@@ -16,9 +16,9 @@ if(isset($_SESSION['username'])){
 </head>
 <body>
     <div class="register-container"> 
-        <div class="logo"> <img src="/../assets/Logo2.png/" alt="logo" class="logo-img"></div>
+        <div class="logo"> <img src="../../assets/Logo2.png" alt="logo" class="logo-img"></div>
         <h2>Registrasi</h2>
-        <form action="/../action/useraction/procreg.php" method="POST">
+        <form action="../useraction/procreg.php" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -49,7 +49,7 @@ if(isset($_SESSION['username'])){
         </form>
         <p class="login-link">
             Sudah punya akun?
-            <a href="/../action/login/login.php">Masuk di sini</a>
+            <a href="../login/login.php">Masuk di sini</a>
         </p>
     </div>
     <div class="popup" id="popup">
@@ -59,12 +59,12 @@ if(isset($_SESSION['username'])){
             <?php
             if(isset($_GET['status']) && $_GET['status'] === 'success') {
             ?> 
-                <button onclick="window.location.href='/../action/login/login.php'">
+                <button onclick="window.location.href='../login/login.php'">
             <?php    
             echo 'Login Sekarang';
             } else { 
             ?>
-                <button onclick="window.location.href='/../action/register/register.php'">
+                <button onclick="window.location.href='../register/register.php'">
             <?php 
             echo 'Tutup';
             }
@@ -82,7 +82,7 @@ if(isset($_SESSION['username'])){
         }
     }?>
 
-    <footer class="footer"> <!-- FOOTER -->
+    <footer class="footer">
          <p>© 2025 Jeda Sebentar</p>
     </footer>
 </body>

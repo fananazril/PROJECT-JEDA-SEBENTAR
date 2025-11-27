@@ -3,7 +3,7 @@ session_start();
 
 // fungsi cek sesi per user 
 if (isset($_SESSION['username'])) {
-    header("Location: /../beranda/home.php"); // syntax path
+    header("Location: ../beranda/home.php");
     exit;
 }
 ?>
@@ -17,14 +17,14 @@ if (isset($_SESSION['username'])) {
 </head>
 <body>
     <div class="login-container">
-        <div class="logo"> <img src="/../assets/Logo2.png" alt="logo" class="logo-img"></div>
+        <div class="logo"> <img src="../../assets/Logo2.png" alt="logo" class="logo-img"></div>
         <h2>Masuk</h2>
 
         <?php if (isset($_GET['error'])): ?>
             <p class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></p>
         <?php endif; ?>
 
-        <form action="/../action/useraction/proclogin.php" method="POST"> <div class="form-group">
+        <form action="../useraction/proclogin.php" method="POST"> <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
             </div>
@@ -35,11 +35,11 @@ if (isset($_SESSION['username'])) {
             <button type="submit" class="login-button">Masuk</button>
         </form>
         <p class="register-link">
-            Belum punya akun? <a href="/../action/register/register.php"> Daftar di sini </a>
+            Belum punya akun? <a href="../register/register.php"> Daftar di sini </a>
         </p>
     </div>
 
-    <footer class="footer"> <!-- FOOTER -->
+    <footer class="footer">
          <p>© 2025 Jeda Sebentar</p>
     </footer>
 </body>

@@ -1,12 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: /../action/login/login.php"); 
+    header("Location: ../action/login/login.php"); 
     exit;
 }
 $currentUserId = $_SESSION['user_id'] ?? null;
 if (!$currentUserId) {
-     header("Location: /../action/login/login.php?error=Sesi_tidak_valid");
+     header("Location: ../action/login/login.php?error=Sesi_tidak_valid");
      exit;
 }
 
@@ -14,7 +14,7 @@ require_once __DIR__ . '/../database/database.php';
 require_once __DIR__ . '/../action/jurnalaction/listjurnal.php';
 require_once __DIR__ . '/../action/jurnalaction/carijurnal.php';
 
-$allowedSortColumns = ['idjurnal','judul','tanggal'];
+$allowedSortColumns = ['tanggal'];
 $allowedSortOrders = ['ASC', 'DESC'];
 
 $sortBy = isset($_GET['sort_by']) && in_array($_GET['sort_by'], $allowedSortColumns) ? $_GET['sort_by'] : 'tanggal';
@@ -58,7 +58,7 @@ if ($conn) mysqli_close($conn);
 <body>
 <header class="header">
     <div class="logo">
-        <img src="/../assets/Logo1.png" alt="logo" class="logo-img">
+        <img src="../assets/Logo1.png" alt="logo" class="logo-img">
     </div>
     
     <div class="top-bar">
@@ -86,7 +86,7 @@ if ($conn) mysqli_close($conn);
     </div>
     
     <nav>
-        <a href="/../action/useraction/logout.php" class="logout-btn" onclick="return confirm('Yakin ingin logout?');">
+        <a href="../action/useraction/logout.php" class="logout-btn" onclick="return confirm('Yakin ingin logout?');">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
     </nav>
@@ -129,7 +129,7 @@ if ($conn) mysqli_close($conn);
                 <a href="#" class="dropdown-item edit-link">
                     <i class="fas fa-edit"></i> Edit
                 </a>
-                <a href="/../action/jurnalaction/hapusjurnal.php?id=<?php echo $jurnalId; ?>"
+                <a href="../action/jurnalaction/hapusjurnal.php?id=<?php echo $jurnalId; ?>"
                    class="dropdown-item delete-link"
                    onclick="return confirm('Hapus jurnal ini?');">
                     <i class="fas fa-trash"></i> Hapus
@@ -152,6 +152,11 @@ if ($conn) mysqli_close($conn);
         <span class="close-btn">&times;</span>
         <div class="detail-header">
             <h2 id="detail-judul"></h2>
+        </div>
+        <div class="detail-tanggal">
+            <div class="detail-tanggal-wrapper">
+                <span id="detail-tanggal"></span>
+            </div>
             <div class="detail-actions">
                 <button class="btn-edit" id="detailEditBtn" title="Edit">
                     <i class="fas fa-edit"></i>
@@ -161,7 +166,6 @@ if ($conn) mysqli_close($conn);
                 </button>
             </div>
         </div>
-        <div class="detail-tanggal" id="detail-tanggal"></div>
         <div class="detail-divider"></div>
         <div class="detail-isi" id="detail-isi"></div>
         <div class="detail-timestamp" id="detail-timestamp"></div>
@@ -172,7 +176,7 @@ if ($conn) mysqli_close($conn);
     <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h2><i class="fas fa-plus-circle"></i> Tambah Jurnal Baru</h2>
-        <form action="/../action/jurnalaction/tambahjurnal.php" method="POST">
+        <form action="../action/jurnalaction/tambahjurnal.php" method="POST">
             <label for="judul">Judul</label>
             <input type="text" id="judul" name="judul" placeholder="Masukkan judul jurnal" required>
 
@@ -193,7 +197,7 @@ if ($conn) mysqli_close($conn);
     <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h2><i class="fas fa-edit"></i> Edit Jurnal</h2>
-        <form action="/../action/jurnalaction/editjurnal.php" method="POST">
+        <form action="../action/jurnalaction/editjurnal.php" method="POST">
             <input type="hidden" id="edit-jurnal-id" name="id">
 
             <label for="edit-judul">Judul</label>
@@ -212,7 +216,7 @@ if ($conn) mysqli_close($conn);
     </div>
 </div>
 
-<script src="/../script/script.js"></script>
+<script src="../script/script.js"></script>
 
 <footer class="footer"> 
     <p>&copy; 2025 Jeda Sebentar | Catat Momen Berharga Anda</p>

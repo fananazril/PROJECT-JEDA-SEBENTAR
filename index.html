@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeda Sebentar</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --text-main: rgb(171, 0, 0);
+      --text-sub: #585858;
+      --accent: #ea0000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      color: var(--text-main);
+      background: url('/assets/Page2.png');
+      background-size: cover;
+      display: flex;
+      overflow-x: hidden;
+      position: relative;
+      padding-bottom: 60px;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(3px);
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 320px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--text-main);
+      margin-bottom: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    .start-btn {
+      display: inline-block;
+      padding: 12px 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(171, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(171, 0, 0, 0.45);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+      background: rgba(171, 0, 0, 0.75);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(171, 0, 0, 0.65);
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--glass-border);
+      color: var(--text-sub);
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 10px 0;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+      z-index: 50;
+    }
+
+    .footer:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content">
+    <img src="JEDASEBENTAR/assets/Logo2.png" alt="Logo" class="logo">
+      <h1>Lepas Penatmu, Jedalah Sebentar!</h1>
+    <a href="JEDASEBENTAR/beranda/home.php" class="start-btn">Mulai</a>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 Jeda Sebentar.</p>
+  </footer>
+
+</body>
+</html>
