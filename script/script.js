@@ -5,6 +5,21 @@ const addBtn = document.getElementById("addJurnalBtn");
 
 let currentDetailId = null;
 
+function formatTanggalIndonesia(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    
+    const tanggal = date.getDate();
+    const bulanNama = bulan[date.getMonth()];
+    const tahun = date.getFullYear();
+    const jam = String(date.getHours()).padStart(2, '0');
+    const menit = String(date.getMinutes()).padStart(2, '0');
+    
+    return `${tanggal} ${bulanNama} ${tahun}, ${jam}:${menit}`;
+}
+
 //fungsi tombol tambah
 if (addBtn) {
     addBtn.addEventListener("click", function(e) {
@@ -116,7 +131,8 @@ document.querySelectorAll(".jurnal-card").forEach(card => {
         const judul = this.dataset.judul;
         const tanggal = this.dataset.tanggal;
         const isi = this.dataset.isi;
-        const dibuat = this.dataset.dibuat; 
+        const dibuat = this.dataset.dibuat;
+        const diupdate = this.dataset.diupdate;
     
         currentDetailId = id;
         document.getElementById("detail-judul").textContent = judul;
@@ -128,22 +144,23 @@ document.querySelectorAll(".jurnal-card").forEach(card => {
         
         document.getElementById("detail-isi").textContent = isi;
         
-        //timestamp dibuat
-        const timestampElement = document.getElementById("detail-timestamp");
-        if (timestampElement && dibuat) {
-            const timestampDate = new Date(dibuat);
-            const timestampOptions = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            const formattedTimestamp = timestampDate.toLocaleDateString('id-ID', timestampOptions);
-            timestampElement.innerHTML = `<i class="far fa-clock"></i> Dibuat pada: ${formattedTimestamp}`;
-        } else if (timestampElement) {
-            timestampElement.innerHTML = '';
+
+        const dibuatElement = document.getElementById("detail-dibuat");
+        if (dibuatElement && dibuat) {
+            dibuatElement.innerHTML = `<i class="far fa-clock"></i> Dibuat: ${formatTanggalIndonesia(dibuat)}`;
+        } else if (dibuatElement) {
+            dibuatElement.innerHTML = '';
+        }
+
+        const diupdateElement = document.getElementById("detail-diupdate");
+        if (diupdateElement) {
+            if (diupdate && diupdate !== dibuat && diupdate !== '0000-00-00 00:00:00' && diupdate !== '') {
+                diupdateElement.innerHTML = `<i class="fas fa-sync-alt"></i> Diperbarui: ${formatTanggalIndonesia(diupdate)}`;
+                diupdateElement.style.display = 'block';
+            } else {
+                diupdateElement.innerHTML = '';
+                diupdateElement.style.display = 'none';
+            }
         }
 
         if (detailModal) {

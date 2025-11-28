@@ -14,31 +14,41 @@ require_once __DIR__ . '/../database/database.php';
 require_once __DIR__ . '/../action/jurnalaction/listjurnal.php';
 require_once __DIR__ . '/../action/jurnalaction/carijurnal.php';
 
-$allowedSortColumns = ['tanggal', 'dibuat'];
+$allowedSortColumns = ['judul', 'tanggal', 'dibuat'];
 $allowedSortOrders = ['ASC', 'DESC'];
 
-$sortBy = isset($_GET['sort_by']) && in_array($_GET['sort_by'], $allowedSortColumns) ? $_GET['sort_by'] : 'tanggal';
+$sortBy = isset($_GET['sort_by']) && in_array($_GET['sort_by'], $allowedSortColumns) ? $_GET['sort_by'] : 'dibuat';
 $sortOrder = isset($_GET['sort_order']) && in_array(strtoupper($_GET['sort_order']), $allowedSortOrders) ? strtoupper($_GET['sort_order']) : 'DESC';
+
+$itemsPerPage = 6;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $itemsPerPage;
 
 $daftarJurnalTampil = [];
 $keyword = '';
 $pesan = '';
+$totalItems = 0;
+$totalPages = 0;
 
 if (isset($_GET['keyword']) && !empty(trim($_GET['keyword']))) {
     $keyword = trim($_GET['keyword']);
     if (function_exists('cariJurnalByJudul')) {
-        $daftarJurnalTampil = cariJurnalByJudul($conn, $keyword, $currentUserId, $sortBy, $sortOrder);
+        $totalItems = getTotalCariJurnal($conn, $keyword, $currentUserId);
+        $totalPages = ceil($totalItems / $itemsPerPage);
+        $daftarJurnalTampil = cariJurnalByJudul($conn, $keyword, $currentUserId, $sortBy, $sortOrder, $itemsPerPage, $offset);
         if (empty($daftarJurnalTampil)) {
             $pesan = "Tidak ada jurnal ditemukan untuk: <strong>" . htmlspecialchars($keyword) . "</strong>";
         } else {
-            $pesan = "Menampilkan hasil pencarian untuk: <strong>" . htmlspecialchars($keyword) . "</strong>";
+            $pesan = "Menampilkan hasil pencarian untuk: <strong>" . htmlspecialchars($keyword) . "</strong> (Total: $totalItems jurnal)";
         }
     } else {
         $pesan = "Error: Fungsi pencarian tidak ditemukan.";
     }
 } else {
     if (function_exists('getAllJurnal')) {
-        $daftarJurnalTampil = getAllJurnal($conn, $currentUserId, $sortBy, $sortOrder);
+        $totalItems = getTotalJurnal($conn, $currentUserId);
+        $totalPages = ceil($totalItems / $itemsPerPage);
+        $daftarJurnalTampil = getAllJurnal($conn, $currentUserId, $sortBy, $sortOrder, $itemsPerPage, $offset);
     } else {
         $pesan = "Error: Fungsi daftar jurnal tidak ditemukan.";
     }
@@ -71,13 +81,26 @@ if ($conn) mysqli_close($conn);
             <?php if (!empty($keyword)): ?>
                 <input type="hidden" name="keyword" value="<?php echo htmlspecialchars($keyword); ?>">
             <?php endif; ?>
-           <select name="sort_by" onchange="this.form.submit()">
-                    <option value="dibuat" <?php echo $sortBy === 'dibuat' ? 'selected' : ''; ?>>Tanggal </option>
-            </select>
-            <select name="sort_order" onchange="this.form.submit()">
-                <option value="DESC" <?php echo $sortOrder === 'DESC' ? 'selected' : ''; ?>>Terbaru</option>
-                <option value="ASC" <?php echo $sortOrder === 'ASC' ? 'selected' : ''; ?>>Terlama</option>
-            </select>
+            
+            <div class="sort-group">
+                <label for="sort_by"><i class="fas fa-sort"></i></label>
+                <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+                    <option value="dibuat" <?php echo $sortBy === 'dibuat' ? 'selected' : ''; ?>>Tanggal Dibuat</option>
+                    <option value="tanggal" <?php echo $sortBy === 'tanggal' ? 'selected' : ''; ?>>Tanggal Jurnal</option>
+                    <option value="judul" <?php echo $sortBy === 'judul' ? 'selected' : ''; ?>>Judul (A-Z)</option>
+                </select>
+            </div>
+            
+            <div class="sort-group">
+                <select name="sort_order" onchange="this.form.submit()">
+                    <option value="DESC" <?php echo $sortOrder === 'DESC' ? 'selected' : ''; ?>>
+                        <?php echo ($sortBy === 'judul') ? 'Z-A' : 'Terbaru'; ?>
+                    </option>
+                    <option value="ASC" <?php echo $sortOrder === 'ASC' ? 'selected' : ''; ?>>
+                        <?php echo ($sortBy === 'judul') ? 'A-Z' : 'Terlama'; ?>
+                    </option>
+                </select>
+            </div>
         </form>
         
         <button class="add-btn" id="addJurnalBtn">
@@ -104,13 +127,15 @@ if ($conn) mysqli_close($conn);
             $tanggal = htmlspecialchars($jurnal['tanggal']);
             $isi = htmlspecialchars($jurnal['isi']);
             $dibuat = htmlspecialchars($jurnal['dibuat'] ?? '');
+            $diupdate = htmlspecialchars($jurnal['diupdate'] ?? '');
     ?>
     <div class="jurnal-card"
         data-id="<?php echo $jurnalId; ?>"
         data-judul="<?php echo $judul; ?>"
         data-tanggal="<?php echo $tanggal; ?>"
         data-isi="<?php echo $isi; ?>"
-        data-dibuat="<?php echo $dibuat; ?>">
+        data-dibuat="<?php echo $dibuat; ?>"
+        data-diupdate="<?php echo $diupdate; ?>">
       
         <div class="jurnal-left">
             <div class="jurnal-title"><?php echo $judul; ?></div>
@@ -147,6 +172,53 @@ if ($conn) mysqli_close($conn);
     <?php endif; ?>
 </div>
 
+<?php if ($totalPages > 1): ?>
+<div class="pagination">
+    <?php
+    $params = [];
+    if (!empty($keyword)) $params[] = 'keyword=' . urlencode($keyword);
+    if ($sortBy !== 'dibuat') $params[] = 'sort_by=' . $sortBy;
+    if ($sortOrder !== 'DESC') $params[] = 'sort_order=' . $sortOrder;
+    $baseUrl = '?' . implode('&', $params);
+    $separator = empty($params) ? '?' : '&';
+    ?>
+    
+    <?php if ($page > 1): ?>
+        <a href="<?php echo $baseUrl . $separator; ?>page=1" class="pagination-btn">
+            <i class="fas fa-angle-double-left"></i>
+        </a>
+        <a href="<?php echo $baseUrl . $separator; ?>page=<?php echo $page - 1; ?>" class="pagination-btn">
+            <i class="fas fa-angle-left"></i>
+        </a>
+    <?php endif; ?>
+    
+    <?php
+    $startPage = max(1, $page - 2);
+    $endPage = min($totalPages, $page + 2);
+    
+    for ($i = $startPage; $i <= $endPage; $i++):
+    ?>
+        <a href="<?php echo $baseUrl . $separator; ?>page=<?php echo $i; ?>" 
+           class="pagination-btn <?php echo $i === $page ? 'active' : ''; ?>">
+            <?php echo $i; ?>
+        </a>
+    <?php endfor; ?>
+    
+    <?php if ($page < $totalPages): ?>
+        <a href="<?php echo $baseUrl . $separator; ?>page=<?php echo $page + 1; ?>" class="pagination-btn">
+            <i class="fas fa-angle-right"></i>
+        </a>
+        <a href="<?php echo $baseUrl . $separator; ?>page=<?php echo $totalPages; ?>" class="pagination-btn">
+            <i class="fas fa-angle-double-right"></i>
+        </a>
+    <?php endif; ?>
+    
+    <span class="pagination-info">
+        Halaman <?php echo $page; ?> dari <?php echo $totalPages; ?>
+    </span>
+</div>
+<?php endif; ?>
+
 <div id="detailJurnalModal" class="modal">
     <div class="modal-content modal-detail">
         <span class="close-btn">&times;</span>
@@ -168,7 +240,10 @@ if ($conn) mysqli_close($conn);
         </div>
         <div class="detail-divider"></div>
         <div class="detail-isi" id="detail-isi"></div>
-        <div class="detail-timestamp" id="detail-timestamp"></div>
+        <div class="detail-timestamp">
+            <div id="detail-dibuat"></div>
+            <div id="detail-diupdate"></div>
+        </div>
     </div>
 </div>
 
@@ -224,3 +299,4 @@ if ($conn) mysqli_close($conn);
 
 </body>
 </html>
+

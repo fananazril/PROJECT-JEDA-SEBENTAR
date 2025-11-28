@@ -105,19 +105,54 @@ body {
   color: var(--text-sub);
 }
 
-.sort-form { display: flex; gap: 8px; align-items: center; }
-
-.sort-form select {
-  padding: 8px 12px;
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--text-main);
-  font-size: 14px;
-  cursor: pointer;
-  outline: none;
+.sort-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
+.sort-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+}
+
+.sort-group label {
+  color: var(--text-sub);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.sort-group i {
+  font-size: 14px;
+}
+
+.sort-form select {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 500;
+}
+
+.sort-form select:hover {
+  background: rgba(234, 0, 0, 0.05);
+}
+
+.sort-form select:focus {
+  background: rgba(234, 0, 0, 0.08);
+}
 .add-btn {
   padding: 8px 16px;
   border: none;
@@ -520,26 +555,114 @@ nav { flex-shrink: 0; }
 
 .detail-timestamp {
   padding: 20px 40px 30px;
-  text-align: center;
-  font-size: 15px;
-  color: var(--text-sub);
   background: rgba(234, 0, 0, 0.02);
   border-top: 1px solid rgba(234, 0, 0, 0.1);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   gap: 8px;
-  font-style: italic;
-  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.detail-timestamp > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
 }
 
 .detail-timestamp i {
-  color: var(--accent);
-  font-size: 15px;
+  font-size: 14px;
+  color: #888;
 }
+
+#detail-dibuat {
+  color: #666;
+  font-style: italic;
+}
+
+#detail-dibuat i {
+  color: var(--accent);
+}
+
+
+#detail-diupdate {
+  color: #2196F3;
+  font-weight: 500;
+  font-style: italic;
+}
+
+#detail-diupdate i {
+  color: #2196F3;
+}
+
 
 .detail-timestamp:empty {
   display: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 30px auto 40px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  padding: 0 15px;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-btn:hover {
+  background: rgba(234, 0, 0, 0.1);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(234, 0, 0, 0.2);
+}
+
+.pagination-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(234, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.pagination-btn i {
+  font-size: 14px;
+}
+
+.pagination-info {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  color: var(--text-sub);
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 8px;
 }
 
 /* FOOTER */
@@ -620,13 +743,27 @@ nav { flex-shrink: 0; }
   
   .detail-timestamp {
     padding: 15px 20px 20px;
-    font-size: 14px;
+    font-size: 13px;
+  }
+  
+  .detail-timestamp i {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
   .jurnal-title { font-size: 18px; }
   .modal-content h2 { font-size: 20px; }
+
+  .detail-timestamp {
+    padding: 12px 15px 15px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .detail-timestamp i {
+    font-size: 12px;
+  }
   
   .detail-header {
     padding: 20px 15px;

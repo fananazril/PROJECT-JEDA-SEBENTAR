@@ -27,6 +27,7 @@ if(isset($_SESSION['username'])){
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <div class="password-wrapper">
@@ -36,22 +37,22 @@ if(isset($_SESSION['username'])){
                     </button>
                 </div>
             </div>
-<div class="form-group">
-    <label for="confirm">Konfirmasi Password:</label>
-    <div class="password-wrapper">
-        <input type="password" name="confirm" id="confirm" required>
-        <button type="button" class="toggle-password" onclick="toggleConfirm()">
-            <i class="bi bi-eye"></i>
-        </button>
-    </div>
-</div>
+
+            <div class="form-group">
+                <label for="confirm">Konfirmasi Password:</label>
+                <div class="password-wrapper">
+                    <input type="password" name="confirm" id="confirm" required>
+                    <button type="button" class="toggle-password" onclick="toggleConfirm()">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+
         <button type="submit" name="submit" class="register-button">DAFTAR</button>
         </form>
-        <p class="login-link">
-            Sudah punya akun?
-            <a href="../login/login.php">Masuk di sini</a>
-        </p>
+        <p class="login-link"> Sudah punya akun? <a href="../login/login.php">Masuk di sini</a></p>
     </div>
+    
     <div class="popup" id="popup">
         <div class="popup-content">
             <h3 id="popup-title"></h3>

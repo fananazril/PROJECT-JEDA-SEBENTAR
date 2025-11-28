@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validasi
     if ($idJurnal > 0 && !empty($judul) && !empty($isi)) {
-        $sql = "UPDATE jurnal SET judul = ?, isi = ?, tanggal = ? WHERE idjurnal = ? AND id_user = ?";
+        $sql = "UPDATE jurnal SET judul = ?, isi = ?, tanggal = ?, diupdate = NOW() WHERE idjurnal = ? AND id_user = ?";
         $stmt = mysqli_prepare($conn, $sql);
 
         if ($stmt) {
