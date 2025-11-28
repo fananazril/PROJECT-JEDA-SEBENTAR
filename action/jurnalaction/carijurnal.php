@@ -7,10 +7,10 @@ function cariJurnalByJudul(mysqli $connection, string $keyword, int $userid, str
     $sortOrder = in_array(strtoupper($sortOrder), $allowedOrders) ? strtoupper($sortOrder) : 'ASC';
 
     $keywordAman = mysqli_real_escape_string($connection, $keyword);
-    $sql = "SELECT idjurnal, judul, isi, tanggal
+    $sql = "SELECT idjurnal, judul, isi, tanggal, dibuat
             FROM jurnal
             WHERE judul LIKE ? AND id_user = ? 
-            ORDER BY `$sortBy` $sortOrder";
+            ORDER BY `dibuar' $sortOrder";
 
     $stmt = mysqli_prepare($connection, $sql);
     if ($stmt) {

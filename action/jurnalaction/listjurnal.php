@@ -6,7 +6,7 @@ function getAllJurnal(mysqli $connection, int $userid, string $sortBy = 'judul',
     $sortBy = in_array($sortBy, $allowedCols) ? $sortBy : 'judul';
     $sortOrder = in_array(strtoupper($sortOrder), $allowedOrders) ? strtoupper($sortOrder) : 'ASC';
 
-    $sql = "SELECT idjurnal, judul, isi, tanggal, dibuat FROM jurnal WHERE id_user = ? ORDER BY `$sortBy` $sortOrder";
+    $sql = "SELECT idjurnal, judul, isi, tanggal, dibuat FROM jurnal WHERE id_user = ? ORDER BY `dibuat` $sortOrder";
     $stmt = mysqli_prepare($connection, $sql);
 
     if ($stmt) {

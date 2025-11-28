@@ -14,7 +14,7 @@ require_once __DIR__ . '/../database/database.php';
 require_once __DIR__ . '/../action/jurnalaction/listjurnal.php';
 require_once __DIR__ . '/../action/jurnalaction/carijurnal.php';
 
-$allowedSortColumns = ['tanggal'];
+$allowedSortColumns = ['tanggal', 'dibuat'];
 $allowedSortOrders = ['ASC', 'DESC'];
 
 $sortBy = isset($_GET['sort_by']) && in_array($_GET['sort_by'], $allowedSortColumns) ? $_GET['sort_by'] : 'tanggal';
@@ -71,8 +71,8 @@ if ($conn) mysqli_close($conn);
             <?php if (!empty($keyword)): ?>
                 <input type="hidden" name="keyword" value="<?php echo htmlspecialchars($keyword); ?>">
             <?php endif; ?>
-            <select name="sort_by" id="sortSelect" onchange="this.form.submit()">
-                <option value="tanggal" <?php echo $sortBy === 'tanggal' ? 'selected' : ''; ?>>Tanggal</option>
+           <select name="sort_by" onchange="this.form.submit()">
+                    <option value="dibuat" <?php echo $sortBy === 'dibuat' ? 'selected' : ''; ?>>Tanggal </option>
             </select>
             <select name="sort_order" onchange="this.form.submit()">
                 <option value="DESC" <?php echo $sortOrder === 'DESC' ? 'selected' : ''; ?>>Terbaru</option>
@@ -115,7 +115,7 @@ if ($conn) mysqli_close($conn);
         <div class="jurnal-left">
             <div class="jurnal-title"><?php echo $judul; ?></div>
             <div class="jurnal-tanggal">
-                <i class="far fa-calendar-alt"></i> <?php echo date('d M Y', strtotime($tanggal)); ?>
+                    <i class="far fa-calendar-alt"></i> <?php echo date('d M Y H:i', strtotime($dibuat)); ?>
             </div>
             <div class="jurnal-preview"><?php echo mb_substr($isi, 0, 120) . (mb_strlen($isi) > 120 ? '...' : ''); ?></div>
         </div>
